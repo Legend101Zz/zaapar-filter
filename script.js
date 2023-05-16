@@ -135,122 +135,122 @@ faceTracker.onVisible.bind(() => {
   }
 });
 
-const logo = new Image();
-logo.src = "logo.png";
-logo.onload = function () {
-  // Create a new canvas element
-  const canvas = document.createElement("canvas");
-  canvas.width = logo.width;
-  canvas.height = logo.height;
+// const logo = new Image();
+// logo.src = "logo.png";
+// logo.onload = function () {
+//   // Create a new canvas element
+//   const canvas = document.createElement("canvas");
+//   canvas.width = logo.width;
+//   canvas.height = logo.height;
 
-  // Draw the image onto the canvas
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(logo, 0, 0);
+//   // Draw the image onto the canvas
+//   const ctx = canvas.getContext("2d");
+//   ctx.drawImage(logo, 0, 0);
 
-  // Create a new texture from the canvas
-  const texture = new THREE.CanvasTexture(canvas);
+//   // Create a new texture from the canvas
+//   const texture = new THREE.CanvasTexture(canvas);
 
-  // Create a new material with the texture
-  const material = new THREE.SpriteMaterial({ map: texture });
+//   // Create a new material with the texture
+//   const material = new THREE.SpriteMaterial({ map: texture });
 
-  // Create a new sprite with the geometry and material
-  const sprite = new THREE.Sprite(material);
+//   // Create a new sprite with the geometry and material
+//   const sprite = new THREE.Sprite(material);
 
-  // Set the position of the sprite to the top right corner
-  sprite.position.set(1.5, 3.2, 0);
-  sprite.scale.set(logo.width / logo.height, 1, 1);
+//   // Set the position of the sprite to the top right corner
+//   sprite.position.set(1.5, 3.2, 0);
+//   sprite.scale.set(logo.width / logo.height, 1, 1);
 
-  // Add the sprite to the scene
-  scene.add(sprite);
-};
+//   // Add the sprite to the scene
+//   scene.add(sprite);
+// };
 
-const slogan = new Image();
-slogan.src = "slogan.png";
-slogan.onload = function () {
-  // Create a new canvas element
-  const canvas = document.createElement("canvas");
-  canvas.width = slogan.width;
-  canvas.height = slogan.height;
+// const slogan = new Image();
+// slogan.src = "slogan.png";
+// slogan.onload = function () {
+//   // Create a new canvas element
+//   const canvas = document.createElement("canvas");
+//   canvas.width = slogan.width;
+//   canvas.height = slogan.height;
 
-  // Draw the image onto the canvas
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(slogan, 0, 0);
+//   // Draw the image onto the canvas
+//   const ctx = canvas.getContext("2d");
+//   ctx.drawImage(slogan, 0, 0);
 
-  // Create a new texture from the canvas
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.needsUpdate = true;
+//   // Create a new texture from the canvas
+//   const texture = new THREE.CanvasTexture(canvas);
+//   texture.needsUpdate = true;
 
-  // Create a new material with the texture
-  const material = new THREE.SpriteMaterial({ map: texture });
+//   // Create a new material with the texture
+//   const material = new THREE.SpriteMaterial({ map: texture });
 
-  // Create a new sprite with the geometry and material
-  const sprite = new THREE.Sprite(material);
+//   // Create a new sprite with the geometry and material
+//   const sprite = new THREE.Sprite(material);
 
-  // Set the position of the sprite to the top right corner
-  sprite.position.set(1.3, -3.05, 0);
-  sprite.scale.set((slogan.width / slogan.height) * 1.5, 1.5, 1);
+//   // Set the position of the sprite to the top right corner
+//   sprite.position.set(1.3, -3.05, 0);
+//   sprite.scale.set((slogan.width / slogan.height) * 1.5, 1.5, 1);
 
-  // Add the sprite to the scene
-  scene.add(sprite);
-};
+//   // Add the sprite to the scene
+//   scene.add(sprite);
+// };
 
-const btn = new Image();
-btn.src = "snapshot.png";
-btn.onload = function () {
-  // Create a new canvas element
-  const canvas = document.createElement("canvas");
-  canvas.width = btn.width;
-  canvas.height = btn.height;
+// const btn = new Image();
+// btn.src = "snapshot.png";
+// btn.onload = function () {
+//   // Create a new canvas element
+//   const canvas = document.createElement("canvas");
+//   canvas.width = btn.width;
+//   canvas.height = btn.height;
 
-  // Draw the image onto the canvas
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(btn, 0, 0);
+//   // Draw the image onto the canvas
+//   const ctx = canvas.getContext("2d");
+//   ctx.drawImage(btn, 0, 0);
 
-  // Create a new texture from the canvas
-  const texture = new THREE.CanvasTexture(canvas);
+//   // Create a new texture from the canvas
+//   const texture = new THREE.CanvasTexture(canvas);
 
-  // Create a new material with the texture
-  const material = new THREE.SpriteMaterial({ map: texture });
+//   // Create a new material with the texture
+//   const material = new THREE.SpriteMaterial({ map: texture });
 
-  // Create a new sprite with the geometry and material
-  const sprite = new THREE.Sprite(material);
+//   // Create a new sprite with the geometry and material
+//   const sprite = new THREE.Sprite(material);
 
-  // Set the position of the sprite to the top right corner
-  sprite.position.set(-1.4, -3.4, 0);
-  sprite.scale.set((btn.width / btn.height) * 0.5, 0.5, 1);
+//   // Set the position of the sprite to the top right corner
+//   sprite.position.set(-1.4, -3.4, 0);
+//   sprite.scale.set((btn.width / btn.height) * 0.5, 0.5, 1);
 
-  // Add the sprite to the scene
-  scene.add(sprite);
-};
+//   // Add the sprite to the scene
+//   scene.add(sprite);
+// };
 
-const gradient = new Image();
-gradient.src = "gradient.png";
-gradient.onload = function () {
-  // Create a new canvas element
-  const canvas = document.createElement("canvas");
-  canvas.width = gradient.width;
-  canvas.height = gradient.height;
+// const gradient = new Image();
+// gradient.src = "gradient.png";
+// gradient.onload = function () {
+//   // Create a new canvas element
+//   const canvas = document.createElement("canvas");
+//   canvas.width = gradient.width;
+//   canvas.height = gradient.height;
 
-  // Draw the image onto the canvas
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(gradient, 0, 0);
+//   // Draw the image onto the canvas
+//   const ctx = canvas.getContext("2d");
+//   ctx.drawImage(gradient, 0, 0);
 
-  // Create a new texture from the canvas
-  const texture = new THREE.CanvasTexture(canvas);
+//   // Create a new texture from the canvas
+//   const texture = new THREE.CanvasTexture(canvas);
 
-  // Create a new material with the texture
-  const material = new THREE.SpriteMaterial({ map: texture, opacity: 0.5 });
+//   // Create a new material with the texture
+//   const material = new THREE.SpriteMaterial({ map: texture, opacity: 0.5 });
 
-  // Create a new sprite with material
-  const sprite = new THREE.Sprite(material);
+//   // Create a new sprite with material
+//   const sprite = new THREE.Sprite(material);
 
-  // Set the position of the sprite to the top right corner
-  sprite.position.set(0, 0, 0);
-  sprite.scale.set((gradient.width / gradient.height) * 6, 8, 1);
+//   // Set the position of the sprite to the top right corner
+//   sprite.position.set(0, 0, 0);
+//   sprite.scale.set((gradient.width / gradient.height) * 6, 8, 1);
 
-  // Add the sprite to the scene
-  scene.add(sprite);
-};
+//   // Add the sprite to the scene
+//   scene.add(sprite);
+// };
 
 // Get a reference to the 'Snapshot' button so we can attach a 'click' listener
 const placeButton =
