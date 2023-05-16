@@ -10,9 +10,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 const img = document.createElement("img");
 const img2 = document.createElement("img");
 const img3 = document.createElement("img");
+const img4 = document.createElement("img");
 img.src = "./slogan.png";
 img2.src = "./gradient.png";
 img3.src = "./logo.png";
+img4.src = "./snapshot.png";
 
 //slogan image here
 img.style.width = renderer.domElement.width;
@@ -33,9 +35,17 @@ renderer.domElement.style.position = "absolute";
 
 img3.style.width = renderer.domElement.width * 2;
 img3.style.height = renderer.domElement.height * 2;
+img3.style.backgroundSize = "10px";
 img3.style.right = 0;
 img3.style.top = 0;
 img3.style.position = "absolute";
+
+//button here
+img4.style.width = "60px";
+img4.style.height = "60px";
+img4.style.left = 0;
+img4.style.bottom = 0;
+img4.style.position = "absolute";
 
 // document.body.appendChild(renderer.domElement);
 
@@ -44,6 +54,7 @@ console.log("here");
 document.body.appendChild(renderer.domElement);
 document.body.appendChild(img2);
 document.body.appendChild(img3);
+document.body.appendChild(img4);
 document.body.appendChild(img);
 renderer.setAnimationLoop(render);
 
@@ -72,7 +83,7 @@ scene.add(trackerGroup);
 // add some content
 const box = new THREE.Mesh(
   new THREE.BoxBufferGeometry(),
-  new THREE.MeshBasicMaterial()
+  new THREE.MeshBasicMaterial({ color: 0x8080ff })
 );
 box.scale.set(0.1, 0.1, 0.1);
 box.position.set(0, 1, 0);
@@ -104,12 +115,12 @@ console.log(loader);
 // });
 
 loader.load(
-  "./world_cup_trophy-2/pikachu.glb",
+  "./world_cup_trophy-2/Gate1.glb",
   function (gltf) {
     // scene.add(gltf.scene);
     const model = gltf.scene;
-    model.scale.set(10, 10, 10);
-    // model.position.set(0, 0.1, 0);
+    model.scale.set(0.01, 0.01, 0.01);
+    model.position.set(0, 0.1, 0);
 
     trackerGroup.add(model);
     // scene.add(model);
@@ -272,6 +283,10 @@ placeButton.addEventListener("click", () => {
 
 const light = new THREE.AmbientLight("rgb(255,255,255)");
 scene.add(light);
+
+const light2 = new THREE.HemisphereLight(0xfff0f0, 0x606066);
+light.position.set(0, 1, 1);
+scene.add(light2);
 
 const spotLight = new THREE.SpotLight("rgb(255,255,255)");
 spotLight.position.set(100, 1000, 1000);
