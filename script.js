@@ -1,25 +1,40 @@
 const faceMeshTexturePath = new URL("./gradient.png", import.meta.url).href;
 const manager = new ZapparThree.LoadingManager();
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(768, 1024);
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+// renderer.setSize(768, 1024);
 // renderer.setSize(500, 500);
 // 768 × 1024
+renderer.setSize(window.innerWidth, window.innerHeight);
 
 const img = document.createElement("img");
 const img2 = document.createElement("img");
+const img3 = document.createElement("img");
 img.src = "./slogan.png";
 img2.src = "./gradient.png";
+img3.src = "./logo.png";
 
 //slogan image here
 img.style.width = renderer.domElement.width;
 img.style.height = renderer.domElement.height;
+img.style.right = 0;
+img.style.bottom = 0;
 img.style.position = "absolute";
 
 //gradient here
-img2.style.width = renderer.domElement.width / 2;
-img2.style.height = renderer.domElement.height / 2;
+img2.style.width = "100%";
+img2.style.height = "100%";
 img2.style.position = "absolute";
+img2.style.backgroundSize = "cover";
+img2.style.backgroundRepeat = "no-repeat";
 renderer.domElement.style.position = "absolute";
+
+//logo here
+
+img3.style.width = renderer.domElement.width * 2;
+img3.style.height = renderer.domElement.height * 2;
+img3.style.right = 0;
+img3.style.top = 0;
+img3.style.position = "absolute";
 
 // document.body.appendChild(renderer.domElement);
 
@@ -27,6 +42,7 @@ console.log("here");
 
 document.body.appendChild(renderer.domElement);
 document.body.appendChild(img2);
+document.body.appendChild(img3);
 document.body.appendChild(img);
 renderer.setAnimationLoop(render);
 
