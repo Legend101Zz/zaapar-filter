@@ -1,3 +1,4 @@
+// import { GLTFLoader } from "./node_modules/three/examples/jsm/loaders/GLTFLoader";
 const faceMeshTexturePath = new URL("./gradient.png", import.meta.url).href;
 const manager = new ZapparThree.LoadingManager();
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -90,7 +91,8 @@ trackerGroup.add(faceMeshObject);
 // face tacking ends
 
 // Load the 3D model
-const loader = new THREE.GLTFLoader();
+// const loader = new THREE.GLTFLoader();
+const loader = new THREE.GLTFLoader(manager);
 console.log(loader);
 // loader.load("./world_cup_trophy-2/pikachu.glb", function (gltf) {
 //   const model = gltf.scene;
@@ -110,7 +112,7 @@ loader.load(
     // model.position.set(0, 0.1, 0);
 
     trackerGroup.add(model);
-    scene.add(model);
+    // scene.add(model);
   },
   (xhr) => {
     console.log(
