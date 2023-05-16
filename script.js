@@ -91,14 +91,36 @@ trackerGroup.add(faceMeshObject);
 
 // Load the 3D model
 const loader = new THREE.GLTFLoader();
-loader.load("./world_cup_trophy-2/scene.gltf", function (gltf) {
-  const model = gltf.scene;
-  model.scale.set(0.1, 0.1, 0.1);
-  model.position.set(0, 0.1, 0);
+console.log(loader);
+// loader.load("./world_cup_trophy-2/pikachu.glb", function (gltf) {
+//   const model = gltf.scene;
+//   model.scale.set(1, 1, 1);
+//   model.position.set(0, 0.1, 0);
 
-  // Add the 3D model to the scene
-  scene.add(model);
-});
+//   // Add the 3D model to the scene
+//   scene.add(model);
+// });
+
+loader.load(
+  "./world_cup_trophy-2/pikachu.glb",
+  function (gltf) {
+    // scene.add(gltf.scene);
+    const model = gltf.scene;
+    model.scale.set(10, 10, 10);
+    // model.position.set(0, 0.1, 0);
+
+    trackerGroup.add(model);
+    scene.add(model);
+  },
+  (xhr) => {
+    console.log(
+      (xhr.loaded / xhr.total) * 100 + "% loaded model loaded sucess"
+    );
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 // Set up the face tracking callback function
 faceTracker.onVisible.bind(() => {
   const pose = faceTracker.pose(ZapparThree.DefaultFaceLandmark.NOSE_TIP);
