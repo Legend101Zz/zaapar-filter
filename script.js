@@ -1,16 +1,14 @@
-// import { GLTFLoader } from "./node_modules/three/examples/jsm/loaders/GLTFLoader";
 const faceMeshTexturePath = new URL("./gradient.png", import.meta.url).href;
 const manager = new ZapparThree.LoadingManager();
 const renderer = new THREE.WebGLRenderer({ alpha: true });
-// renderer.setSize(768, 1024);
-// renderer.setSize(500, 500);
-// 768 × 1024
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const img = document.createElement("img");
 const img2 = document.createElement("img");
 const img3 = document.createElement("img");
+const placeButton = document.createElement("button");
 const img4 = document.createElement("img");
+
 img.src = "./slogan.png";
 img2.src = "./gradient.png";
 img3.src = "./logo.png";
@@ -32,7 +30,6 @@ img2.style.backgroundRepeat = "no-repeat";
 renderer.domElement.style.position = "absolute";
 
 //logo here
-
 img3.style.width = renderer.domElement.width * 2;
 img3.style.height = renderer.domElement.height * 2;
 img3.style.backgroundSize = "10px";
@@ -41,21 +38,42 @@ img3.style.top = 0;
 img3.style.position = "absolute";
 
 //button here
-img4.style.width = "60px";
-img4.style.height = "60px";
-img4.style.left = 0;
-img4.style.bottom = 0;
-img4.style.position = "absolute";
+// img4.style.width = "60px";
+// img4.style.height = "60px";
+// img4.style.left = 0;
+// img4.style.bottom = 0;
+// img4.style.position = "absolute";
 
-// document.body.appendChild(renderer.domElement);
-
-console.log("here");
+placeButton.style.width = "60px";
+placeButton.style.height = "60px";
+placeButton.style.left = 0;
+placeButton.style.bottom = 0;
+placeButton.style.position = "absolute";
+// icon not loading
+placeButton.style.backgroundImage = "url('./snapshot.png')";
 
 document.body.appendChild(renderer.domElement);
 document.body.appendChild(img2);
 document.body.appendChild(img3);
-document.body.appendChild(img4);
+// document.body.appendChild(img4);
 document.body.appendChild(img);
+document.body.appendChild(placeButton);
+
+// click snapshot -- clicking blank screen
+placeButton.onclick = function () {
+  console.log("clicked");
+  // Get canvas from dom
+  const canvas = document.querySelector("canvas");
+
+  // Convert canvas data to url
+  const url = canvas.toDataURL("image/jpeg", 0.8);
+
+  // Take snapshot
+  ZapparSharing({
+    data: url,
+  });
+};
+
 renderer.setAnimationLoop(render);
 
 // Setup a Zappar camera instead of one of ThreeJS's cameras
@@ -80,14 +98,15 @@ scene.background = camera.backgroundTexture;
 const tracker = new ZapparThree.FaceTrackerLoader(manager).load();
 const trackerGroup = new ZapparThree.FaceAnchorGroup(camera, tracker);
 scene.add(trackerGroup);
+
 // add some content
-const box = new THREE.Mesh(
-  new THREE.BoxBufferGeometry(),
-  new THREE.MeshBasicMaterial({ color: 0x8080ff })
-);
-box.scale.set(0.1, 0.1, 0.1);
-box.position.set(0, 1, 0);
-trackerGroup.add(box);
+// const box = new THREE.Mesh(
+//   new THREE.BoxBufferGeometry(),
+//   new THREE.MeshBasicMaterial({ color: 0x8080ff })
+// );
+// box.scale.set(0.1, 0.1, 0.1);
+// box.position.set(0, 1, 0);
+// trackerGroup.add(box);
 
 const faceMesh = new ZapparThree.FaceMeshLoader(manager).load();
 const faceBufferGeometry = new ZapparThree.FaceBufferGeometry(faceMesh);
@@ -102,28 +121,15 @@ trackerGroup.add(faceMeshObject);
 // face tacking ends
 
 // Load the 3D model
-// const loader = new THREE.GLTFLoader();
 const loader = new THREE.GLTFLoader(manager);
-console.log(loader);
-// loader.load("./world_cup_trophy-2/pikachu.glb", function (gltf) {
-//   const model = gltf.scene;
-//   model.scale.set(1, 1, 1);
-//   model.position.set(0, 0.1, 0);
-
-//   // Add the 3D model to the scene
-//   scene.add(model);
-// });
-
 loader.load(
   "./world_cup_trophy-2/Gate1.glb",
   function (gltf) {
     // scene.add(gltf.scene);
     const model = gltf.scene;
     model.scale.set(0.01, 0.01, 0.01);
-    model.position.set(0, 0.1, 0);
-
+    model.position.set(0, 1, 0);
     trackerGroup.add(model);
-    // scene.add(model);
   },
   (xhr) => {
     console.log(
@@ -134,16 +140,29 @@ loader.load(
     console.log(error);
   }
 );
+let faceTracker = new ZapparThree.FaceTracker();
 // Set up the face tracking callback function
 faceTracker.onVisible.bind(() => {
-  const pose = faceTracker.pose(ZapparThree.DefaultFaceLandmark.NOSE_TIP);
+  // const pose = faceTracker.pose(ZapparThree.DefaultFaceLandmark.NOSE_TIP);
 
-  if (pose) {
-    // Position the 3D model on the user's head
-    const { position, rotation } = pose;
-    model.position.set(position[0], position[1], position[2]);
-    model.rotation.set(rotation[0], rotation[1], rotation[2]);
-  }
+  // if (pose) {
+  //   // Position the 3D model on the user's head
+  //   const { position, rotation } = pose;
+  //   model.position.set(position[0], position[1], position[2]);
+  //   model.rotation.set(rotation[0], rotation[1], rotation[2]);
+  let faceLandmarkGroup = new ZapparThree.FaceLandmarkGroup(
+    camera,
+    faceTracker,
+    ZapparThree.FaceLandmarkName.CHIN
+  );
+  scene.add(faceLandmarkGroup);
+  const box = new THREE.Mesh(
+    new THREE.BoxBufferGeometry(),
+    new THREE.MeshBasicMaterial({ color: 0x8080ff })
+  );
+  box.scale.set(0.1, 0.1, 0.1);
+  // Add in any 3D objects you'd like to track to this face
+  faceLandmarkGroup.add(box);
 });
 
 // const logo = new Image();
@@ -262,24 +281,6 @@ faceTracker.onVisible.bind(() => {
 //   // Add the sprite to the scene
 //   scene.add(sprite);
 // };
-
-// Get a reference to the 'Snapshot' button so we can attach a 'click' listener
-const placeButton =
-  document.getElementById("snapshot") || document.createElement("div");
-
-placeButton.addEventListener("click", () => {
-  // Get canvas from dom
-  const canvas =
-    document.querySelector("canvas") || document.createElement("canvas");
-
-  // Convert canvas data to url
-  const url = canvas.toDataURL("image/jpeg", 0.8);
-
-  // Take snapshot
-  ZapparWebGLSnapshot({
-    data: url,
-  });
-});
 
 const light = new THREE.AmbientLight("rgb(255,255,255)");
 scene.add(light);
